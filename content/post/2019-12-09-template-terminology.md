@@ -77,23 +77,37 @@ extern int j; // a declaration of j as a variable
 
 In contrast goto labels and macro definitions are not considered declarations in C++.  
 
-
-
-
+Declarations become _definitions_ when the underlying implementation of their stucture are present, with variables this means when their storag space is allocated in memory. Classes and functions make this transition when a brace-enclosed body are present. e.g. :
 
 ```c++
 class D{}; // definition and declaration of class D
 void h(double g) { // definition and declaration of function h()
-    std:: cout << g << std::endl;
+    std::cout << g << std::endl;
 
 }
 
 extern int j = 10; // initializer makes this a definition for j
 
+int j; // global var declarations not preceded by extern qualifies as a definition
 ```
 
-+ **declaration** of 
++ **declaration** of function template
+
+```c++
+template <typename T>
+void funky (T);
+```
+
++ **definition** of class template
+
+```c++
+template <typename T>
+class B {};
+```
+
+
 # The One-Definition Rule
+
 
 
 
@@ -105,7 +119,7 @@ extern int j = 10; // initializer makes this a definition for j
 + Prefer the usage of terms like _class template_ , _function template_, and _member function template_ when talking about templates.
 + Templates can be specialized by passing arguments to it's declarations.
 + Declarations introduce a name into a C++ scope.
-+
++ Definitions of classes and functions require a brace-enclosed body. 
 
 # References 
 
