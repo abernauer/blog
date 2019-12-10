@@ -77,7 +77,7 @@ extern int j; // a declaration of j as a variable
 
 In contrast goto labels and macro definitions are not considered declarations in C++.  
 
-Declarations become _definitions_ when the underlying implementation of their stucture are present, with variables this means when their storag space is allocated in memory. Classes and functions make this transition when a brace-enclosed body are present. e.g. :
+Declarations become _definitions_ when the underlying implementation of their stucture are present, with variables this means when their storage space is allocated in memory. Classes and functions make this transition when a brace-enclosed body are present. e.g. :
 
 ```c++
 class D{}; // definition and declaration of class D
