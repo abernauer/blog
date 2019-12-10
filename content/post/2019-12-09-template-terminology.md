@@ -34,4 +34,19 @@ template<> // explicit specialization
 class AClass<std::vector, int> {
 ...
 };
+
+
 ```
+
+# Definitions versus Declarations 
+
+
+
+# The One-Definition Rule
+
+
+
+# Template Parameters versus Template Arguments
+
+
+
