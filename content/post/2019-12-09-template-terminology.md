@@ -149,7 +149,7 @@ int main()
     ArrayNestClass<bool,4> ap;
     ap.array[1] = true;
 }
-````
+```
 
 A simple way of distinguishing between _template parameters_ and _template arguments_ is you "pass arguments to become parameters".
 
