@@ -18,3 +18,20 @@ In the Spring of 2019 I started working on a [mlpack](https://www.mlpack.org/doc
 # "Template Class" or "Class Template"?
 
 According to the C++ standard structs, classes and unions are called _class types_ . Additionally class is a subset of _class type_
+
+
+# Instantiation and Specialization
+
+
+```c++
+template <typename T1, typename T2> // primary class template 
+class AClass{
+...
+};
+
+
+template<> // explicit specialization
+class AClass<std::vector, int> {
+...
+};
+```
