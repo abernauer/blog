@@ -65,7 +65,7 @@ class AClass<bool,T>{
 
 # Definitions versus Declarations 
 
-According to the C++ standard a _declaration_ is a C++ idea that introduces a name into a scope.
+According to the C++ standard a _declaration_ is a C++ construct that introduces a name into a scope.
 All of the information or the implementation of that name are not necessary  for a valid declaration e.g. :
 
 ```c++
