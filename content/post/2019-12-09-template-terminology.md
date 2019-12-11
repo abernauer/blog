@@ -166,9 +166,10 @@ A simple way of distinguishing between _template parameters_ and _template argum
 + Declarations introduce a name into a C++ scope.
 + Definitions of classes and functions require a brace-enclosed body. 
 + Follow ODR the compiler will complain. 
-+ Template arguments are passed by substitution or value more than just names even template parameters
++ Template arguments are passed by substitution or value.
++ Template arguments can be more than just names even template parameters
 + Templates can be constructed out of other templates.
 
 # References 
 
-_Vandvoorde, David_ . _Josuttis, Nicolai_. __C++ Templates The Complete Guide__
+Vandvoorde, David, Josuttis, Nicolai. 2002 *C++ Templates The Complete Guide*
