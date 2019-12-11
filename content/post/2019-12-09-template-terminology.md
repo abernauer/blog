@@ -142,7 +142,7 @@ Upon substituting in the values bool and 4 for the parameters T and J the former
 ArrayNestClass<bool,4>
 ```  
 
-The _template arguments_ fall within the angled brackets in the above syntax.The presence of the template name followed by arguments in angle brackets is a _template-id_.
+The _template arguments_ fall within the angled brackets in the above syntax. The presence of the template name followed by arguments in angle brackets is a _template-id_.
 The template can be used as follows.   
 
 ```c++ 
