@@ -1,0 +1,48 @@
+---
+title: Revisiting an old project and embedding a shiny app
+author: Andrew Bernauer
+date: '2020-09-18'
+slug: revisiting-an-old-project-and-embedding-a-shiny-app
+categories: []
+tags:
+  - R
+  - shiny
+output: html_document
+runtime: shiny
+---
+
+## Introduction 
+
+In the spring of 2019, I wrote some R code for a shiny application that would display the draft results of my auction draft. My motivation was to get better at using Shiny which I used in a prior group project at UIUC.
+Along with using the shiny application as a part of my application for an R Studio internship that spring. Also I wanted to see if any of my competitors had tendencies to over pay for certain players. 
+However; I didn't get the opportunity to actually host the application on the internet and get people to use the application so this blog entry was a great opportunity to do just that.
+
+
+## The Data 
+
+I extracted the draft results using Google Chromes web developer tools and some JavaScipt hacking. By hiting Ctrl+Shift+C you can click on any HTML element on the page then in the console you can call your desired functions on the web page element. Which happened to be easy in my circumstance as I was just extracting text data. Then I dropped my text data into a .txt file and wrote some R code to structure the data into dataframes [link here](https://github.com/abernauer/Shiny_Fantasy_App/blob/alpha/Data/Data_processing.Rmd)
+
+## Setup and Hostsing the application on Shinyappsio
+
+Embedding your shiny application in an iframe or in simpler terms another html document within our html is the easiest approach. So I used [shinyapps.io](https://www.shinyapps.io/) open source license that let's you host up to five shiny applications for free on their dedicated servers. Alternatively, you could spend a lot more time and resources and host the application on a linux server or use docker containers. 
+
+
+```{r, echo=FALSE}
+library(shiny)
+library(shinyLP)
+```
+
+
+
+
+
+## The application
+
+
+
+
+
+
+```{r}
+iframe(width = "800", "800", url_link = "https://abernauer.shinyapps.io/shiny_fantasy_app/")
+```
