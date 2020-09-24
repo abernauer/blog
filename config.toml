@@ -17,7 +17,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "https://github.com/abernauer"
 [[menu.main]]
     name = "LinkedIn"
-    url = "https://www.linkedin.com/in/andrew-bernauer-60084913b/"
+    url = "https://www.linkedin.com/in/andrew-bernauer/"
 
 
 [params]
