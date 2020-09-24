@@ -14,7 +14,7 @@ read books, optimize his fantasy baseball lineup, and collaborate with others. H
 | STAT    | Statistical Programming Methods |
 | STAT    |      Statistical Computing      |
 | MATH    |      Applied Linear Algebra     |
-| MATH    | Multivariable Caclculus         |
+| MATH    | Multivariable Calculus          |
 | ECON    | Applied Machine Learning        |
 | STAT    | Statistics and Probability I    |
 | ECON    | Intro to Applied Econometrics   |
