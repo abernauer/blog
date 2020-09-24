@@ -1,0 +1,120 @@
+---
+title: Revisiting an old project and embedding a shiny app
+author: Andrew Bernauer
+date: '2020-09-18'
+slug: revisiting-an-old-project-and-embedding-a-shiny-app
+categories: []
+tags:
+  - R
+  - shiny
+output: html_document
+runtime: shiny
+---
+
+
+
+<div id="section-introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In the spring of 2019, I wrote some R code for a shiny application that would display the draft results of my auction draft. My motivation was to get better at using Shiny which I used in a prior group project at UIUC.
+Along with using the shiny application as a part of my application for an R Studio internship that spring. Also I wanted to see if any of my competitors in my fantasy baseball league had tendencies to over pay for certain players.
+However; I didn’t get the opportunity to actually host the application on the internet and get people to use the application so this blog entry was a great opportunity to do just that.</p>
+</div>
+<div id="section-the-data" class="section level2">
+<h2>The Data</h2>
+<p>I extracted the draft results using Google Chromes web developer tools and some JavaScipt hacking. By hiting Ctrl+Shift+C you can click on any HTML element on the page then in the console you can call your desired functions on the web page element. Which happened to be easy in my circumstance, as I was just extracting text data. Then I dropped my text data into a .txt file and wrote some R code to structure the data into dataframes <a href="https://github.com/abernauer/Shiny_Fantasy_App/blob/alpha/Data/Data_processing.Rmd">link here</a></p>
+</div>
+<div id="section-setup-and-hosting-the-application-on-shinyappsio" class="section level2">
+<h2>Setup and Hosting the application on Shinyappsio</h2>
+<p>Embedding your shiny application in an iframe or in simpler terms another html document within our html document is the easiest approach. So I used <a href="https://www.shinyapps.io/">shinyapps.io</a> open source license that let’s you host up to five shiny applications for free on their dedicated servers. Alternatively, you could spend a lot more time and resources and host the application on a linux server or use docker containers. Deploying the application is as easy as installing a package and following instructions an <a href="https://shiny.rstudio.com/articles/shinyapps.html">example</a>.</p>
+<pre><code>## 
+## Attaching package: &#39;shinyLP&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:shiny&#39;:
+## 
+##     runExample</code></pre>
+</div>
+<div id="section-the-shiny-code" class="section level2">
+<h2>The shiny code</h2>
+<pre class="r"><code># load in all our R objects for the dataframes
+shane_df &lt;- readRDS(file = &quot;Data/beliebers.rds&quot;)
+redemption_df &lt;- readRDS(file = &quot;Data/kshank.rds&quot;)
+choo_df &lt;- readRDS(file = &quot;Data/choo.rds&quot;)
+beavens_df &lt;- readRDS(file = &quot;Data/beavens.rds&quot;)
+tyrone_df &lt;- readRDS(file = &quot;Data/tyrone.rds&quot;)
+Mckenna_df &lt;- readRDS(file = &quot;Data/mckenna.rds&quot;)
+votos_df &lt;- readRDS(file = &quot;Data/bartolos.rds&quot;)
+a_rod_df &lt;- readRDS(file = &quot;Data/ARod.rds&quot;)
+sniffers_df &lt;- readRDS(file = &quot;Data/Sniffersrow.rds&quot;)
+christy_df &lt;- readRDS(file = &quot;Data/Team_christy.rds&quot;)
+long_ball_df &lt;- readRDS(file = &quot;Data/Long_Ball.rds&quot;)
+wright_df &lt;- readRDS(file = &quot;Data/The_Wright.rds&quot;)
+
+# Define UI for application that supplies interactive data tables
+ui &lt;- fluidPage( 
+  titlePanel(&quot;An app for displaying Fantasy draft results &quot;),
+  sidebarLayout(sidebarPanel(helpText(&quot;Create a datatable for fantasy draft results based on team. Note that the dashboard only permits one table at a time&quot;),
+                              radioButtons(&quot;team&quot;, &quot;Choose a team:&quot;, choices = c(&quot;Kershawshank Redemption&quot;, &quot;Choo Talkin to Me?&quot;, &quot;Team Beavens&quot;, &quot;I&#39;am Tyrone&quot;,
+                                                                                       &quot;Team Mckenna&quot;, &quot;Bartolos Votos&quot;, &quot;Shane Beliebers&quot;, &quot;A Rod&quot;, &quot;Sniffer&#39;s Row&quot;, &quot;Team Christy&quot;, &quot;Long Ball&quot;, &quot;The Wright Players&quot;), selected = &quot;Shane Beliebers&quot;)
+                              
+                              
+                
+                
+                
+                
+                             ),
+                 
+    mainPanel(DT::dataTableOutput(&#39;table&#39;))
+                  
+                 
+                 
+                 )
+)
+   
+ 
+
+
+
+# Define server logic required to draw interactive data tables
+server &lt;- function(input, output) {
+
+output$table &lt;- DT::renderDataTable(
+ team_displayed &lt;- teamInput()
+  )
+
+ teamInput &lt;- reactive({
+   switch (input$team,
+          &quot;Kershawshank Redemption&quot; = redemption_df,
+          &quot;Choo Talkin to Me?&quot; = choo_df,
+          &quot;Team Beavens&quot; = beavens_df,
+          &quot;I&#39;am Tyrone&quot; = tyrone_df, 
+          &quot;Team Mckenna&quot; = Mckenna_df,
+          &quot;Bartolos Votos&quot; = votos_df,
+          &quot;Shane Beliebers&quot; = shane_df, 
+          &quot;A Rod&quot; = a_rod_df, 
+          &quot;Sniffer&#39;s Row&quot; = sniffers_df, 
+          &quot;Team Christy&quot; = christy_df, 
+          &quot;Long Ball&quot; = long_ball_df, 
+          &quot;The Wright Players&quot; = wright_df)
+ 
+   
+   })
+   
+
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)</code></pre>
+</div>
+<div id="section-the-application" class="section level2">
+<h2>The application</h2>
+<p>I encountered problems using an iframe in the body of my Rmarkdown documment, so I found the package <a href="https://cran.r-project.org/web/packages/shinyLP/index.html">shinyLP</a> and just used the iframe function.</p>
+<pre class="r"><code>iframe(width = &quot;800&quot;, &quot;800&quot;, url_link = &quot;https://abernauer.shinyapps.io/shiny_fantasy_app/&quot;)</code></pre>
+<iframe width="800" height="800" src="https://abernauer.shinyapps.io/shiny_fantasy_app/"></iframe>
+</div>
+<div id="section-summary" class="section level2">
+<h2>Summary</h2>
+<ul>
+<li>Hosting a shiny app on your blogdown site is as easy as deploying your app on shinyapps.io</li>
+<li>Writing the shiny app code and using the rsconnect to deploy the app</li>
+<li>Writing a blog post and embedding the external link to your app in an iframe.</li>
+</ul>
+</div>
